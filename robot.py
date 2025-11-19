@@ -9,13 +9,33 @@ class Robot:
         self.drive_base = DriveBase(left_motor, right_motor, wheel_diameter, axle_track)
         self.hub = PrimeHub()
         self.drive_base.use_gyro(True)
+        self.historia = []
 
     #Movimiento
-    def straight(self, distance):
+    def straight(self, distance, guardar = True):
         self.drive_base.straight(distance)
+        if guardar:
+            self.historia.append(["straight", [distance]])
+            print(self.historia)
 
-    def turn(self, angle):
+    def turn(self, angle, guardar = True):
         self.drive_base.turn(angle)
+        if guardar:
+            self.historia.append(["turn", [angle]])
+            print(self.historia)
+
+    def deshacer(self, inst):
+        if inst[0] == "straight":
+            distance = inst[1][0]
+            self.straight(-distance, guardar=False)
+        elif inst[0] == "turn":
+            angle = inst[1][0]
+            self.turn(-angle, guardar = False)
+
+    def deshacer_historia(self):
+        for inst in reversed(self.historia):
+            self.deshacer(inst)
+
 
     #Sonido
     def beep(self, freq, duration):

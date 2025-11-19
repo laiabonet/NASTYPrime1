@@ -9,11 +9,17 @@ right_motor = Motor(Port.E)
 r1 = Robot(left_motor, right_motor, 56, 170)
 
 r1.straight(250)
+r1.turn(90)
+r1.straight(200)
+r1.turn(-90)
 r1.beep(800, 500)
-r1.light_blink(Color.VIOLET, [1000, 1000])
-wait(2000)
-r1.play_notes(["C4/4", "C4/4","G4/4","G4/4","A4/4","A4/4","G4/4","F4/4","F4/4","G4/4"])
-wait(10000)
+r1.deshacer_historia()
+
+
+#r1.light_blink(Color.VIOLET, [1000, 1000])
+#wait(2000)
+#r1.play_notes(["C4/4", "C4/4","G4/4","G4/4","A4/4","A4/4","G4/4","F4/4","F4/4","G4/4"])
+#wait(10000)
 
 
 # Drive forward by 500mm (half a meter).
