@@ -1,19 +1,41 @@
-from pybricks.pupdevices import Motor
+from pybricks.pupdevices import Motor, ColorSensor, UltrasonicSensor, ForceSensor
 from pybricks.parameters import Port, Direction, Color
 from pybricks.tools import wait
 from robot import Robot
 
 left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
 right_motor = Motor(Port.E)
+ultrasonido = UltrasonicSensor(Port.D)
+color = ColorSensor(Port.B)
 
 r1 = Robot(left_motor, right_motor, 56, 170)
+r1.guardar_sensor("ultra",ultrasonido)
+r1.guardar_sensor("color",color)
 
-r1.straight(250)
-r1.turn(90)
-r1.straight(200)
-r1.turn(-90)
-r1.beep(800, 500)
-r1.deshacer_historia()
+sonidos = {
+    Color.RED: 800,
+    Color.BLUE: 1000,
+    Color.WHITE: 1200,
+    Color.GREEN: 1400,
+    Color.NONE: 400,
+    Color.YELLOW: 200,
+}
+
+while True:
+    c = r1.sensor("color").color()
+    print(c)
+    r1.beep(sonidos[c], 1000)
+    wait(1000)
+
+#print(r1.sensor("color").color())
+#print(r1.sensor("ultra").distance())
+
+#r1.straight(250)
+#r1.turn(90)
+#r1.straight(200)
+#r1.turn(-90)
+#r1.beep(800, 500)
+#r1.deshacer_historia()
 
 
 #r1.light_blink(Color.VIOLET, [1000, 1000])

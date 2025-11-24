@@ -10,19 +10,28 @@ class Robot:
         self.hub = PrimeHub()
         self.drive_base.use_gyro(True)
         self.historia = []
+        self.sensores = dict()
+
+    def guardar_sensor(self, nombre, sensor):
+        self.sensores[nombre] = sensor
+
+    def sensor(self, nombre):
+        return self.sensores.get(nombre)
+        
+        
 
     #Movimiento
     def straight(self, distance, guardar = True):
         self.drive_base.straight(distance)
         if guardar:
             self.historia.append(["straight", [distance]])
-            print(self.historia)
+            #print(self.historia)
 
     def turn(self, angle, guardar = True):
         self.drive_base.turn(angle)
         if guardar:
             self.historia.append(["turn", [angle]])
-            print(self.historia)
+            #print(self.historia)
 
     def deshacer(self, inst):
         if inst[0] == "straight":
