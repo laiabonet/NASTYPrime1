@@ -33,6 +33,7 @@ class Robot:
             self.historia.append(["turn", [angle]])
             #print(self.historia)
 
+    #Historia
     def deshacer(self, inst):
         if inst[0] == "straight":
             distance = inst[1][0]
@@ -44,7 +45,20 @@ class Robot:
     def deshacer_historia(self):
         for inst in reversed(self.historia):
             self.deshacer(inst)
+    
+    def hacer(self, inst):
+        if inst[0] == "straight":
+            distance = inst[1][0]
+            self.straight(distance, guardar=False)
+        elif inst[0] == "turn":
+            angle = inst[1][0]
+            self.turn(angle, guardar = False)
 
+    def hacer_historia(self, historia):
+        for inst in historia:
+            self.hacer(inst)
+
+        
 
     #Sonido
     def beep(self, freq, duration):
