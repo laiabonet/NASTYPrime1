@@ -16,10 +16,14 @@ r1.guardar_sensor("color",color)
 
 # Suponemos que el robot comienza en la esq 1. mirando al sur
 #
-#   3 N 4
-#     O
-#   1 S
-#
+#   3  4        Norte
+#         Oeste        Este
+#   1  2         Sur
+#  ROJO ->  Ir a la esquina 1
+#  VERDE -> Ir a la esquina 3
+#  AZUL -> Ir a la esquina 4
+#  AMARILLO -> Ir a la esquina 2
+
 freq = {
     Color.RED:250,
     Color.YELLOW:750,
@@ -28,18 +32,26 @@ freq = {
 }
 
 movimientos = {
-    Color.RED:[ ["turn", [-90]],["straight", [830]] ],
-    Color.BLUE:[ ["turn", [-90]],["straight", [830]] ],
-    Color.YELLOW:[ ["turn", [-90]],["straight", [830]] ],
-    Color.GREEN:[ ["turn", [-90]],["straight", [830]] ],
+    (Color.RED,2,"Norte"):[[ ["turn", [-90]],["straight", [830]] ],1, "Oeste"],
+    (Color.RED,2,"Sur"):[[["turn", [90]],["straight", [830]] ],1, "Oeste"],
+    (Color.RED,2,"Oeste"):[[["straight", [830]] ],1,"Oeste"],
+    (Color.RED,2,"Este"):[[["turn", [180]],["straight", [830]] ],1,"Oeste"],
+    (Color.GREEN,1,"Oeste"):[[["turn", [90]],["straight",[830]] ],3, "Norte"],
+    (Color.BLUE,3,"Norte"):[[["turn", [90]]
 }
 
+#Condiciones iniciales
+esquina = 2
+orientacion = "Norte"
 
 while True:
     sensor = r1.sensor("color").color()
-    print(sensor)
+    key = (sensor,esquina,orientacion)
+    historia, esquina, orientacion = movimientos.get(key ,[[], esquina,orientacion])
+
+    print(key)
     r1.beep(freq[sensor], 1000)
-    r1.hacer_historia(movimientos.get(sensor,[]))
+    r1.hacer_historia(historia)
 
     
 
