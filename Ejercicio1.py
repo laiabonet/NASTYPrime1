@@ -32,12 +32,31 @@ freq = {
 }
 
 movimientos = {
-    (Color.RED,2,"Norte"):[[ ["turn", [-90]],["straight", [830]] ],1, "Oeste"],
-    (Color.RED,2,"Sur"):[[["turn", [90]],["straight", [830]] ],1, "Oeste"],
-    (Color.RED,2,"Oeste"):[[["straight", [830]] ],1,"Oeste"],
-    (Color.RED,2,"Este"):[[["turn", [180]],["straight", [830]] ],1,"Oeste"],
-    (Color.GREEN,1,"Oeste"):[[["turn", [90]],["straight",[830]] ],3, "Norte"],
-    (Color.BLUE,3,"Norte"):[[["turn", [90]]
+    #RED
+    
+
+    (Color.RED,1,"Norte"):[ [], 1, "Norte"],
+    (Color.RED,2,"Norte"):[[ ["turn", [-90]],["straight", [830]],["turn", [-90]] ],1, "Oeste"],
+    (Color.RED,3,"Norte"):[[ ["turn", [180]],["straight", [830]], ["turn", [180]] ],1, "Sur"],
+    (Color.RED,4,"Norte"):[[ ["turn", [-90]],    ["straight", [830]],["turn", [-90]],["straight", [830]],["turn", [180]] ],1, "Norte"],
+   
+    #YELLOW
+    (Color.YELLOW,1,"Norte"):[[ ["turn", [90]],["straight", [830]],["turn", [-90]] ],1, "Norte"],
+    (Color.YELLOW,2,"Norte"):[ [], 2, "Norte"],
+    (Color.YELLOW,3,"Norte"):[[ ["turn", [90]],["straight", [830]],["turn",[90]],["straight",[830]] ],1, "Norte"],
+    (Color.YELLOW,4,"Norte"):[[ ["turn", [180]],["straight", [830]] ],1, "Norte"],
+   
+    #GREEN
+    (Color.GREEN,1,"Norte"):[[ ["straight", [830]] ],3, "Norte"],
+    (Color.GREEN,2,"Norte"):[[ ["straight", [830]],["turn",[-90]],["straight",[830]],["turn",[90]] ],3, "Norte"],
+    (Color.GREEN,3,"Norte"):[ [], 3, "Norte"],
+    (Color.GREEN,4,"Norte"):[[ ["turn", [-90]],["straight", [830]],["turn",[90]] ],3, "Norte"],
+
+    #BLUE
+    (Color.BLUE,1,"Norte"):[[ ["straight", [830]],["turn",[90]],["straight",[830]],["turn",[-90]] ],4, "Norte"],
+    (Color.BLUE,2,"Norte"):[[ ["straight", [830]]],4, "Norte"],
+    (Color.BLUE,3,"Norte"):[[ ["turn",[90]],["straight",[830]],["turn",[-90]] ],4, "Norte"],
+    (Color.BLUE,4,"Norte"):[ [], 4, "Norte"],
 }
 
 #Condiciones iniciales
